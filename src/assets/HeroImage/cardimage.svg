@@ -1,0 +1,32 @@
+<svg width="318" height="109" viewBox="0 0 318 109" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g filter="url(#filter0_i_202_2955)">
+<rect x="-0.000488281" y="0.389679" width="318" height="108" rx="8" fill="#2B6BDF"/>
+<rect x="-0.000488281" y="0.389679" width="318" height="108" rx="8" fill="url(#pattern0_202_2955)" fill-opacity="0.6"/>
+<rect x="0.999512" y="1.38968" width="316" height="106" rx="7" stroke="#090C53" stroke-width="2"/>
+<rect x="5.99951" y="6.38968" width="306" height="94" rx="5" stroke="#153061" stroke-width="2"/>
+<g style="mix-blend-mode:soft-light">
+<rect x="2.49951" y="2.88968" width="313" height="101" rx="3.5" stroke="url(#paint0_linear_202_2955)"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_i_202_2955" x="-0.000488281" y="-1.61032" width="318" height="110" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="2" operator="erode" in="SourceAlpha" result="effect1_innerShadow_202_2955"/>
+<feOffset dy="-2"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_202_2955"/>
+</filter>
+<pattern id="pattern0_202_2955" patternContentUnits="objectBoundingBox" width="0.0314465" height="0.0925926">
+<use xlink:href="#image0_202_2955" transform="scale(0.000786164 0.00231481)"/>
+</pattern>
+<linearGradient id="paint0_linear_202_2955" x1="159" y1="3.38968" x2="159" y2="103.39" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="0.574199" stop-color="white" stop-opacity="0.5"/>
+<stop offset="1" stop-color="white" stop-opacity="0.7"/>
+</linearGradient>
+<image id="image0_202_2955" width="40" height="40" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACCSURBVHgB7dSxCYAwFEXRfHEBR3AUN3EBB3ACB3ABN3EUsbHVDRSEdHYP+T9wTxVIikeKa/183imwKgVX58MyNPb1oBu394fXqXW5D/+DDFQxUGW5g/txpYjK6aBX5+jg3xioooMqOkgHvTFQRQdVdJAOemOgig6q6CAd9MZAVfiBD2zmcFbtHSqqAAAAAElFTkSuQmCC"/>
+</defs>
+</svg>
