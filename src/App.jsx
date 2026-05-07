@@ -30,14 +30,27 @@
 
 
 import './App.css';
-import { useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import AOS from "aos";
-import MobileVIew from './MobileVIew';
-import DeskTopView from './DeskTopView';
-import GetUser from "./admin/GetUser";
-import { Routes, Route } from "react-router-dom";
+
+const DeskTopView = lazy(() => import('./DeskTopView'));
+const MobileVIew = lazy(() => import('./MobileVIew'));
 
 function App() {
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 640;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -46,14 +59,16 @@ function App() {
       mirror: false,
     });
   }, []);
+
   return (
     <div>
-      <div className='hidden sm:block'>
-        <DeskTopView/>
-      </div>
-      <div className='block sm:hidden'>
-        <MobileVIew />
-      </div>
+      <Suspense fallback={
+        <div className="flex items-center justify-center min-h-screen">
+          <span className="text-lg font-bold">Loading...</span>
+        </div>
+      }>
+        {isMobile ? <MobileVIew /> : <DeskTopView />}
+      </Suspense>
     </div>
   );
 }

@@ -13,8 +13,10 @@ import mightSmall from "../assets/desktopViewImages/new-introduceOurHero/mightyc
 
 import brainyIcon from "../assets/meet_your_hero/brainyIcon.svg";
 import brainyBig from "../assets/desktopViewImages/new-introduceOurHero/missBrainy.svg";
+// import brainyBig from "../assets/desktopViewImages/new-introduceOurHero/";
 import brainyName from "../assets/meet_your_hero/missBrainyName.svg";
-import activebrainy from "../assets/desktopViewImages/new-introduceOurHero/missBrainyBorder.svg";
+// import activebrainy from "../assets/desktopViewImages/new-introduceOurHero/missBrainyBorder.svg";
+import activebrainy from "../assets/desktopViewImages/new-introduceOurHero/missBrainyBorder.webp";
 
 import flashingflosbig from "../assets/desktopViewImages/new-introduceOurHero/flashinghero.svg";
 import flashingFlossName from "../assets/meet_your_hero/flashingFloosName.svg";
@@ -36,7 +38,8 @@ import hydraHeroName from "../assets/meet_your_hero/hydraHeroName.svg";
 import hydralcon from "../assets/meet_your_hero/hydraIcon.svg";
 import activehydra from "../assets/desktopViewImages/new-introduceOurHero/hydroHeroBorder.svg";
 
-import mightyBig from "../assets/desktopViewImages/new-introduceOurHero/mighty.svg";
+// import mightyBig from "../assets/desktopViewImages/new-introduceOurHero/mighty.svg";
+import mightyBig from "../assets/desktopViewImages/new-introduceOurHero/mighty.webp";
 import mighty_name from "../assets/meet_your_hero/mighty_name.svg";
 import mightyManIcon from "../assets/meet_your_hero/mightyManIcon.svg";
 import activemighty from "../assets/desktopViewImages/new-introduceOurHero/mightyBorder.svg";
@@ -210,7 +213,7 @@ function IntroducedHero() {
     <div className="bg-[#EAD9FF] pb-12 px-5 flex flex-col justify-center items-center gap-10"
     style={{ backgroundImage: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
-      <img src={heading} alt="heading" />
+      <img src={heading} alt="heading" loading="lazy" decoding="async" />
 
       {/* WRAPPER */}
       <div className="flex flex-col xl:flex-row w-full max-w-7xl mx-auto gap-10">
@@ -229,11 +232,15 @@ function IntroducedHero() {
               <img
                 src={activeHero.title}
                 alt="title"
+                loading="lazy"
+                decoding="async"
                 className="h-[50px] md:h-[65px] lg:h-[80px] mb-4"
               />
               <img
                 src={activeHero.referenaceImage}
                 alt="hero"
+                loading="lazy"
+                decoding="async"
                 className="w-[200px] md:w-[260px] lg:w-[320px] h-[340px] md:h-[420px] lg:h-[500px] object-cover rounded-xl"
               />
             </div>
@@ -272,6 +279,8 @@ function IntroducedHero() {
               <img
                 src={hero.image}
                 alt="hero"
+                loading="lazy"
+                decoding="async"
                 className={`absolute top-0 left-0 w-full h-full object-cover rounded-xl transition-opacity duration-500 ${
                   activeIndex === idx ? "opacity-0" : "opacity-100"
                 }`}
@@ -281,6 +290,8 @@ function IntroducedHero() {
               <img
                 src={hero.activeimage}
                 alt="active hero"
+                loading="lazy"
+                decoding="async"
                 className={`absolute top-0 left-0 w-full h-full object-cover rounded-xl transition-opacity duration-500 ${
                   activeIndex === idx ? "opacity-100" : "opacity-0"
                 }`}

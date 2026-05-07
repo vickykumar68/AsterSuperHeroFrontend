@@ -9,9 +9,11 @@ import cloudLeft from "../assets/desktopViewImages/herosection/cloudleftd.svg";
 import cloudRight from "../assets/desktopViewImages/herosection/cloudrightd.svg";
 import cloudCenter from "../assets/desktopViewImages/herosection/cloudcenter.svg";
 import bgHerodesktop from "../assets/desktopViewImages/herosection/bgHerodesktop.svg";
-import allHero from "../assets/desktopViewImages/herosection/allHero.svg";
+// import allHero from "../assets/desktopViewImages/herosection/allHero.svg";
+import allHero from "../assets/desktopViewImages/herosection/allHero.webp";
 import gradientButton from "../assets/desktopViewImages/herosection/hero_subheading.png";
-import title from "../assets/desktopViewImages/herosection/title.svg";
+// import title from "../assets/desktopViewImages/herosection/title.svg";
+import title from "../assets/desktopViewImages/herosection/title.webp";
 import logo_aster from "../assets/HeroImage/logo_aster.svg";
 
 function HeroSectiondesk() {

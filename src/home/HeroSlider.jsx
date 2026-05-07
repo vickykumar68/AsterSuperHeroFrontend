@@ -233,6 +233,8 @@ function HeroSlider({ onHeroSelect }) {
             <img
               src={hero.image}
               alt={hero.title}
+              loading="lazy"
+              decoding="async"
               className="w-[120%] h-[220px] mx-auto"
             />
           </div>

@@ -261,6 +261,8 @@ const RollingGallery = ({
                   <img
                     src={hero.image}
                     alt="gallery"
+                    loading="lazy"
+                    decoding="async"
                     className="block max-w-full max-h-full object-contain 
                             transition-transform duration-300 ease-out group-hover:scale-105"
                   />
