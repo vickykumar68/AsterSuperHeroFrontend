@@ -1,6 +1,7 @@
 // File: AsterHeros.jsx
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { apiUrl } from "../api";
 import * as XLSX from "xlsx";
 import {
   LucideLayoutDashboard,
@@ -36,9 +37,10 @@ export default function AsterHeros() {
 
     try {
       const params = new URLSearchParams({ top: String(topN), mode });
-      const res = await fetch(`/api/v1/superhero/admin/aster-heroes?${params.toString()}`, {
+      const res = await fetch(apiUrl(`/api/v1/superhero/admin/aster-heroes?${params.toString()}`), {
         method: "GET",
         signal: abortRef.current.signal,
+	credentials: "include",  
       });
 
       if (!res.ok) throw new Error(`Server error: ${res.status}`);

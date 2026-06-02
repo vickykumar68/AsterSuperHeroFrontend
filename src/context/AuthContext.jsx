@@ -15,12 +15,13 @@ export const AuthProvider = ({ children }) => {
   const checkAuth = async () => {
     setLoading(true)
     try {
-      const res = await axios.get('/api/v1/superhero/auth/check-auth', { withCredentials: true })
+      const res = await axios.get('/api/v1/superhero/auth/check-auth')
       setIsAuthenticated(true)
       setRole(res.data.user.role)
     } catch (err) {
       setIsAuthenticated(false)
       setRole(null)
+      localStorage.removeItem('accessToken') // Clear invalid token
     } finally {
       setLoading(false)
     }
@@ -28,13 +29,16 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-        const res = await axios.post('/api/v1/superhero/auth/login', { email, password }, { withCredentials: true })
+        const res = await axios.post('/api/v1/superhero/auth/login', { email, password })
         console.log(res)
+        // Store token in localStorage
+        localStorage.setItem('accessToken', res.data.accessToken)
         setIsAuthenticated(true)
         setRole(res.data.user.role)
         return res.data.user.role
     } catch (error) {
         console.error('Login error:', error)
+        throw error
     }
   }
 
@@ -76,12 +80,14 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
    try {
-        await axios.post('/api/v1/superhero/auth/logout', {}, { withCredentials: true })
+        await axios.post('/api/v1/superhero/auth/logout', {})
         setIsAuthenticated(false)
         setRole(null)
+        localStorage.removeItem('accessToken')
         return { success: true }
    } catch (error) {
         console.log("logout error", error)
+        localStorage.removeItem('accessToken') // Clear token even if logout fails
    }
   }
 

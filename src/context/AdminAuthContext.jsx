@@ -15,8 +15,8 @@ export const AdminAuthProvider = ({ children }) => {
   const checkAuth = async () => {
     try {
       const res = await axios.get("/api/v1/superhero/auth/check-auth", { withCredentials: true });
-      setRole(res.data.user.role);
-      setToken(res.data.token || null); // get token from backend
+      setRole(res.data?.user?.role || null);
+      setToken(res.data?.token || null);
     } catch (err) {
       setRole(null);
       setToken(null);
@@ -33,9 +33,16 @@ export const AdminAuthProvider = ({ children }) => {
         { withCredentials: true }
       );
 
-      setRole(res.data.user.role);
-      setToken(res.data.token); // store token
-      return res.data.user.role;
+      const userRole = res.data?.user?.role;
+      const userToken = res.data?.token;
+
+      if (!userRole) {
+        throw new Error("Invalid response from server. Missing role.");
+      }
+
+      setRole(userRole);
+      setToken(userToken || null);
+      return userRole;
     } catch (err) {
       console.error("Admin login error:", err);
       throw err;
@@ -58,3 +65,4 @@ export const AdminAuthProvider = ({ children }) => {
     </AdminAuthContext.Provider>
   );
 };
+

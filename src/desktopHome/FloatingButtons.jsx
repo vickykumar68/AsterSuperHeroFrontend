@@ -1,6 +1,7 @@
 import React from "react";
 import useAuth from '../context/useAuth';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../api';
 
 // const FloatingButtons = () => {
 //   return (
@@ -61,7 +62,7 @@ const handleSignUpLogout = async () => {
   if (isAuthenticated) {
     try {
       // Call logout API
-      const response = await fetch('/api/v1/superhero/auth/logout', {
+      const response = await fetch(apiUrl('/api/v1/superhero/auth/logout'), {
         method: 'POST',
         credentials: 'include', // send cookies if required
       });

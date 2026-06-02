@@ -1,5 +1,6 @@
 import React from 'react';
 import useAuth from '../context/useAuth';
+import { apiUrl } from '../api';
 
 function FixedFooter() {
 
@@ -8,7 +9,7 @@ function FixedFooter() {
  const handleButtonClick = async () => {
   if (isAuthenticated) {
     try {
-      const response = await fetch('/api/v1/superhero/auth/logout', {
+        const response = await fetch(apiUrl('/api/v1/superhero/auth/logout'), {
         method: 'POST',
         credentials: 'include',
       });

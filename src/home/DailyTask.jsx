@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { apiUrl } from '../api';
 import { motion, AnimatePresence } from "framer-motion";
 import { RotateCcw, Heart, Lock  } from 'lucide-react';
 import step1 from "../assets/dailyJournal/step1.svg";
@@ -24,12 +25,18 @@ import thankbg from '../assets/desktopViewImages/multiStepFormDesk/thankbg.png';
 import accessBg from "../assets/accessrestrictedBgmob.png";
 
 
+const getLocalDateString = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+};
+
 function DailyTask() {
   const { isAuthenticated, loading } = useContext(AuthContext);
   const [currentStep, setCurrentStep] = useState(0);
   const [showThankYou, setShowThankYou] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [totalSelected, setTotalSelected] = useState(1);
+  const [isCheckingToday, setIsCheckingToday] = useState(true);
 
   const [steps, setSteps] = useState([
     {
@@ -232,7 +239,64 @@ function DailyTask() {
     );
   };
 
-  if (loading) {
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setIsCheckingToday(false);
+      return;
+    }
+
+    const checkTodayCompletion = async () => {
+      setIsCheckingToday(true);
+      try {
+        const authRes = await axios.get("/api/v1/superhero/auth/check-auth", {
+          withCredentials: true,
+        });
+        const uid = authRes.data?.user?._id || authRes.data?.user?.id;
+        if (!uid) {
+          setIsCheckingToday(false);
+          return;
+        }
+
+        const res = await fetch(apiUrl(`/api/v1/superhero/auth/journal/${uid}`));
+        if (!res.ok) {
+          console.error("Journal fetch failed:", res.status, res.statusText);
+          setIsCheckingToday(false);
+          return;
+        }
+        const data = await res.json();
+        console.log("Journal data:", data);
+
+        const todayKey = getLocalDateString();
+
+        const hasToday = Object.keys(data).includes(todayKey);
+        console.log("Has today:", hasToday, "todayKey:", todayKey, "journal keys:", Object.keys(data));
+
+        // Fallback: if backend has no entry, check sessionStorage for a same-day completion flag
+        const sessionCompleted = sessionStorage.getItem("todayCompleted") === todayKey;
+
+        if (hasToday || sessionCompleted) {
+          const journalKeys = Object.keys(data);
+          if (journalKeys.length > 0) {
+            const firstDate = new Date(journalKeys.sort()[0] + 'T00:00:00');
+            const todayDate = new Date();
+            const daysPassed =
+              Math.floor((todayDate - firstDate) / (1000 * 60 * 60 * 24)) + 1;
+            sessionStorage.setItem("daysPassed", daysPassed);
+          }
+          console.log("Setting showThankYou = true");
+          setShowThankYou(true);
+        }
+      } catch (err) {
+        console.error("Error checking today's completion:", err);
+      } finally {
+        setIsCheckingToday(false);
+      }
+    };
+
+    checkTodayCompletion();
+  }, [isAuthenticated]);
+
+  if (loading || isCheckingToday) {
     return <div className="flex items-center justify-center h-screen">Loading...</div>;
   }
 
@@ -379,6 +443,11 @@ if (showThankYou) {
 //   }
 // };
 
+const getLocalDateString = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+};
+
 const submitForm = async () => {
   if (!isAuthenticated) {
     setErrorMessage("⚠️ You need to log in before submitting.");
@@ -395,9 +464,24 @@ const submitForm = async () => {
     kindness: steps[6].tasks.filter(t => t.completed).map(t => t.text),
   };
 
+  let submittedAnswers = 0;
+  for (const key in responses) {
+    const value = responses[key];
+    if (Array.isArray(value)) {
+      if (value.length > 0) submittedAnswers++;
+    } else if (typeof value === "string") {
+      if (value.trim() !== "") submittedAnswers++;
+    }
+  }
+  responses.submittedAnswers = submittedAnswers;
+
+  const todayKey = getLocalDateString();
+  responses.entryDate = todayKey;
+
   try {
     const response = await axios.post("/api/v1/superhero/track/submit", responses, { withCredentials: true });
-    console.log(response)
+    console.log(response);
+    sessionStorage.setItem("todayCompleted", todayKey);
     setShowThankYou(true);
   } catch (err) {
     console.error("Error submitting form", err);

@@ -9,7 +9,7 @@ import GetUser from './admin/GetUser';
 import AsterHeros from './admin/AsterHeros';
 
 const RootRoutes = () => (
-  <BrowserRouter>
+  <BrowserRouter basename="/super-hero-power-project">
     <AdminAuthProvider>
       <Routes>
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -23,7 +23,6 @@ const RootRoutes = () => (
             <GetUser />
           </AdminProtectedRoute>
         } />
-        <Route path="/*" element={<App />} />
 
         <Route path="/admin/dashboard/asterheros" element={
           <AdminProtectedRoute>

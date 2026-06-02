@@ -1,8 +1,9 @@
 {
-  "name": "frontend",
+  "name": "Aster Clinic Super Hero",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "/super-hero-power-project",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -12,8 +13,10 @@
   "dependencies": {
     "aos": "^2.3.4",
     "axios": "^1.11.0",
+    "express": "^5.2.1",
     "file-saver": "^2.0.5",
     "formik": "^2.4.6",
+    "http-proxy-middleware": "^3.0.5",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.536.0",
     "motion": "^12.23.12",

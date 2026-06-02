@@ -16,7 +16,8 @@ import {
   LucideCalendarDays,
 } from "lucide-react";
 import { AdminAuthContext } from "../context/AdminAuthContext";
- 
+import { apiUrl } from "../api";
+
 const AdminDashboard = () => {
   // Export CSV logic (must be inside component to access filteredData)
   const exportToCSV = () => {
@@ -88,7 +89,7 @@ const exportToExcel = () => {
       let url = `/api/v1/superhero/admin/dashboard?filter=${filterType}`;
       if (filterType !== "all" && filterDate) url += `&date=${filterDate}`;
  
-      const res = await fetch(url, { credentials: "include" }); // <— include cookies
+	const res = await fetch(apiUrl(url), { credentials: "include" }); // <— include cookies
       const data = await res.json();
       console.log("Fetched data:", data);
  

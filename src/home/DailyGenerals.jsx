@@ -19,6 +19,7 @@ import headingToday from "../assets/dailyJournal/headingToday.svg";
 import bgOurJournal from "../assets/dailyJournal/bg_our_journal.svg";
 import missingDay from "../assets/dailyJournal/Missing-Day.svg";
 import axios from 'axios';
+import { apiUrl } from '../api';
 const DailyGenerals = () => {
    const [userId, setUserId] = useState(null);
    const [userName, setUserName] = useState('');
@@ -40,7 +41,7 @@ const DailyGenerals = () => {
       const res = await axios.get("/api/v1/superhero/auth/check-auth", {
         withCredentials: true,
       });
-      setUserId(res.data?.user?.id || null);
+      setUserId(res.data?.user?._id || res.data?.user?.id || null);
       setUserName(res.data?.user?.name || '');
       setUserPersona(res.data?.user?.persona || '');
       // return res.data.user.id;
@@ -62,7 +63,7 @@ const DailyGenerals = () => {
     const fetchData = async () => {
       if (!userId) return;
       try {
-        const res = await fetch(`/api/v1/superhero/auth/journal/${userId}`);
+        const res = await fetch(apiUrl(`/api/v1/superhero/auth/journal/${userId}`));
         const data = await res.json();
 
         const filledDates = Object.keys(data).map((d) => new Date(d));

@@ -3,9 +3,10 @@ import { AdminAuthContext } from "../context/AdminAuthContext";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import heroImage from "../assets/Hero-DataBase.png";
 
 const AdminLogin = () => {
-  const { login, role } = useContext(AdminAuthContext); // include role
+  const { login, role, loading } = useContext(AdminAuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
@@ -15,6 +16,14 @@ const AdminLogin = () => {
       navigate("/admin/dashboard", { replace: true });
     }
   }, [role, navigate]);
+
+  if (loading) {
+    return (
+      <div className="flex h-screen bg-gray-900 items-center justify-center">
+        <div className="text-yellow-500 text-xl font-bold animate-pulse">Loading...</div>
+      </div>
+    );
+  }
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email format").required("Email is required"),
@@ -26,8 +35,9 @@ const AdminLogin = () => {
     try {
       await login(values.email, values.password); // role is updated in context
       // No need to navigate here; useEffect handles it
-    } catch {
-      setError("Login failed. Please try again.");
+    } catch (err) {
+      const msg = err?.response?.data?.message || err?.message || "Login failed. Please try again.";
+      setError(msg);
     }
     setSubmitting(false);
   };
@@ -37,8 +47,8 @@ const AdminLogin = () => {
       {/* Left side image */}
       <div
         className="hidden md:flex w-1/2 bg-cover bg-center bg-no-repeat relative"
-        style={{ backgroundImage: "url('/src/assets/Hero-DataBase.png')" }}
-      >
+        style={{ backgroundImage: `url(${heroImage})` }}
+       >
         <div className="absolute inset-0 bg-black opacity-40"></div>
       </div>
 
@@ -96,4 +106,5 @@ const AdminLogin = () => {
 };
 
 export default AdminLogin;
+
 
