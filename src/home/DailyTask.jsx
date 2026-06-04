@@ -482,6 +482,26 @@ const submitForm = async () => {
     const response = await axios.post("/api/v1/superhero/track/submit", responses, { withCredentials: true });
     console.log(response);
     sessionStorage.setItem("todayCompleted", todayKey);
+
+    // Recalculate daysPassed after submission
+    const authRes = await axios.get("/api/v1/superhero/auth/check-auth", {
+      withCredentials: true,
+    });
+    const uid = authRes.data?.user?._id || authRes.data?.user?.id;
+    if (uid) {
+      const journalRes = await fetch(apiUrl(`/api/v1/superhero/auth/journal/${uid}`));
+      if (journalRes.ok) {
+        const journalData = await journalRes.json();
+        const journalKeys = Object.keys(journalData);
+        if (journalKeys.length > 0) {
+          const firstDate = new Date(journalKeys.sort()[0] + 'T00:00:00');
+          const todayDate = new Date();
+          const daysPassed = Math.floor((todayDate - firstDate) / (1000 * 60 * 60 * 24)) + 1;
+          sessionStorage.setItem("daysPassed", daysPassed);
+        }
+      }
+    }
+
     setShowThankYou(true);
   } catch (err) {
     console.error("Error submitting form", err);
