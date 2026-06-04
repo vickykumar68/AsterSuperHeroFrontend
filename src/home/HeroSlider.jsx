@@ -13,25 +13,25 @@ import mightSmall from "../assets/new_meet_your_hero-mob/MightyMan-card.svg";
 
 import brainyIcon from "../assets/meet_your_hero/brainyIcon.svg";
 import brainyName from "../assets/meet_your_hero/missBrainyName.svg";
-import missBrainyBig from "../assets/new_meet_your_hero-mob/MissBrainy.svg";
+import missBrainyBig from "../assets/desktopViewImages/new-introduceOurHero/missBrainy.webp";
 
-import flashingflosbig from "../assets/new_meet_your_hero-mob/FlashingHero.svg";
+import flashingflosbig from "../assets/desktopViewImages/new-introduceOurHero/flashinghero.webp";
 import flashingFlossName from "../assets/meet_your_hero/flashingFloosName.svg";
 import flossIcon from "../assets/meet_your_hero/flossIcon.svg";
 
-import germZapperBig from "../assets/new_meet_your_hero-mob/GermZapper.svg";
+import germZapperBig from "../assets/desktopViewImages/new-introduceOurHero/germZapper.webp";
 import germZapperName from "../assets/meet_your_hero/germZapperName.svg";
 import germIcon from "../assets/meet_your_hero/germIcon.svg";
 
 import gobblerIcon from "../assets/meet_your_hero/gobblerIcon.svg";
 import greenGobblerName from "../assets/meet_your_hero/greenGobblerName.svg";
-import greenGobblerBig from "../assets/new_meet_your_hero-mob/GreenGobbler.svg";
+import greenGobblerBig from "../assets/desktopViewImages/new-introduceOurHero/GreenGobbler.webp";
 
-import hydraHeroBig from "../assets/new_meet_your_hero-mob/HydroHero.svg";
+import hydraHeroBig from "../assets/desktopViewImages/new-introduceOurHero/hydroHero.webp";
 import hydraHeroName from "../assets/meet_your_hero/hydraHeroName.svg";
 import hydralcon from "../assets/meet_your_hero/hydraIcon.svg";
 
-import mightyBig from "../assets/meet_your_hero/mightyManBig.svg";
+import mightyBig from "../assets/desktopViewImages/new-introduceOurHero/mighty.webp";
 import mighty_name from "../assets/meet_your_hero/mighty_name.svg";
 import mightyManIcon from "../assets/meet_your_hero/mightyManIcon.svg";
 

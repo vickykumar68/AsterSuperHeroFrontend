@@ -1,48 +1,43 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import bg from "../assets/desktopViewImages/introduceOurHero/bg_meet_hero.png";
-import gobbler from "../assets/desktopViewImages/new-introduceOurHero/greengobblercard.svg";
-import germZapper from "../assets/desktopViewImages/new-introduceOurHero/germzappercard.svg";
-import flashingfloss from "../assets/desktopViewImages/new-introduceOurHero/flashingherocard.svg";
-import hydroHero from "../assets/desktopViewImages/new-introduceOurHero/hydroHerocard.svg";
-import brainy from "../assets/desktopViewImages/new-introduceOurHero/missBrainycard.svg";
-import mightSmall from "../assets/desktopViewImages/new-introduceOurHero/mightycard.svg";
+import gobbler from "../assets/desktopViewImages/new-introduceOurHero/greengobblercard.webp";
+import germZapper from "../assets/desktopViewImages/new-introduceOurHero/germzappercard.webp";
+import flashingfloss from "../assets/desktopViewImages/new-introduceOurHero/flashingherocard.webp";
+import hydroHero from "../assets/desktopViewImages/new-introduceOurHero/hydroHerocard.webp";
+import brainy from "../assets/desktopViewImages/new-introduceOurHero/missBrainycard.webp";
+import mightSmall from "../assets/desktopViewImages/new-introduceOurHero/mightycard.webp";
 
 import brainyIcon from "../assets/meet_your_hero/brainyIcon.svg";
-import brainyBig from "../assets/desktopViewImages/new-introduceOurHero/missBrainy.svg";
-// import brainyBig from "../assets/desktopViewImages/new-introduceOurHero/";
+import brainyBig from "../assets/desktopViewImages/new-introduceOurHero/missBrainy.webp";
 import brainyName from "../assets/meet_your_hero/missBrainyName.svg";
-// import activebrainy from "../assets/desktopViewImages/new-introduceOurHero/missBrainyBorder.svg";
 import activebrainy from "../assets/desktopViewImages/new-introduceOurHero/missBrainyBorder.webp";
 
-import flashingflosbig from "../assets/desktopViewImages/new-introduceOurHero/flashinghero.svg";
+import flashingflosbig from "../assets/desktopViewImages/new-introduceOurHero/flashinghero.webp";
 import flashingFlossName from "../assets/meet_your_hero/flashingFloosName.svg";
 import flossIcon from "../assets/meet_your_hero/flossIcon.svg";
-import activeflashing from "../assets/desktopViewImages/new-introduceOurHero/flashingheroborder.svg";
+import activeflashing from "../assets/desktopViewImages/new-introduceOurHero/flashingheroborder.webp";
 
-import germZapperBig from "../assets/desktopViewImages/new-introduceOurHero/germZapper.svg";
+import germZapperBig from "../assets/desktopViewImages/new-introduceOurHero/germZapper.webp";
 import germZapperName from "../assets/meet_your_hero/germZapperName.svg";
 import germIcon from "../assets/meet_your_hero/germIcon.svg";
-import activezapper from "../assets/desktopViewImages/new-introduceOurHero/germzapperborder.svg";
+import activezapper from "../assets/desktopViewImages/new-introduceOurHero/germzapperborder.webp";
 
 import gobblerIcon from "../assets/meet_your_hero/gobblerIcon.svg";
 import greenGobblerName from "../assets/meet_your_hero/greenGobblerName.svg";
-import greenGobblerBig from "../assets/desktopViewImages/new-introduceOurHero/GreenGobbler.svg";
-import activegobbler from "../assets/desktopViewImages/new-introduceOurHero/greengobblerborder.svg";
+import greenGobblerBig from "../assets/desktopViewImages/new-introduceOurHero/GreenGobbler.webp";
+import activegobbler from "../assets/desktopViewImages/new-introduceOurHero/greengobblerborder.webp";
 
-import hydraHeroBig from "../assets/desktopViewImages/new-introduceOurHero/hydroHero.svg";
+import hydraHeroBig from "../assets/desktopViewImages/new-introduceOurHero/hydroHero.webp";
 import hydraHeroName from "../assets/meet_your_hero/hydraHeroName.svg";
 import hydralcon from "../assets/meet_your_hero/hydraIcon.svg";
-import activehydra from "../assets/desktopViewImages/new-introduceOurHero/hydroHeroBorder.svg";
+import activehydra from "../assets/desktopViewImages/new-introduceOurHero/hydroHeroBorder.webp";
 
-// import mightyBig from "../assets/desktopViewImages/new-introduceOurHero/mighty.svg";
 import mightyBig from "../assets/desktopViewImages/new-introduceOurHero/mighty.webp";
 import mighty_name from "../assets/meet_your_hero/mighty_name.svg";
 import mightyManIcon from "../assets/meet_your_hero/mightyManIcon.svg";
-import activemighty from "../assets/desktopViewImages/new-introduceOurHero/mightyBorder.svg";
+import activemighty from "../assets/desktopViewImages/new-introduceOurHero/mightyBorder.webp";
 
 import heading from "../assets/desktopViewImages/introduceOurHero/headingHero.svg";
 
@@ -205,72 +200,102 @@ function IntroducedHero() {
   const [activeIndex, setActiveIndex] = useState(IMGS.length - 1);
   const activeHero = IMGS[activeIndex];
 
-  useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
-  }, []);
+  const gridContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+      }
+    }
+  };
+
+  const gridItemVariants = {
+    hidden: { opacity: 0, scale: 0.9, y: 20 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 15,
+        stiffness: 110,
+      }
+    }
+  };
 
   return (
-    <div className="bg-[#EAD9FF] pb-12 px-5 flex flex-col justify-center items-center gap-10"
-    style={{ backgroundImage: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+    <div 
+      className="bg-[#EAD9FF] pb-12 px-5 flex flex-col justify-center items-center gap-10"
+      style={{ backgroundImage: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
       <img src={heading} alt="heading" loading="lazy" decoding="async" />
 
       {/* WRAPPER */}
       <div className="flex flex-col xl:flex-row w-full max-w-7xl mx-auto gap-10">
-        {/* LEFT HERO CARD */}
-        <motion.div
-          key={activeIndex}
-          data-aos="fade-right"
-          className={`flex-1 rounded-2xl text-white ${activeHero.backgroundClass} p-6 md:p-8 lg:p-10`}
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="flex flex-col md:flex-row gap-6 lg:gap-10 py-12 md:py-16 lg:py-24">
-            {/* HERO IMAGE + TITLE */}
-            <div className="flex flex-col items-center">
-              <img
-                src={activeHero.title}
-                alt="title"
-                loading="lazy"
-                decoding="async"
-                className="h-[50px] md:h-[65px] lg:h-[80px] mb-4"
-              />
-              <img
-                src={activeHero.referenaceImage}
-                alt="hero"
-                loading="lazy"
-                decoding="async"
-                className="w-[200px] md:w-[260px] lg:w-[320px] h-[340px] md:h-[420px] lg:h-[500px] object-cover rounded-xl"
-              />
-            </div>
-
-            {/* HERO DESCRIPTION */}
-            <div className="flex flex-col justify-center max-w-full md:max-w-[300px] lg:max-w-[340px] gap-4 md:gap-5">
-              <h3 className="text-lg md:text-2xl lg:text-[32px] font-goldman font-black mb-2 md:mb-4 leading-snug md:leading-tight drop-shadow-lg uppercase tracking-tighter [-webkit-text-stroke:1.2px_black]">
-                {activeHero.heading}
-              </h3>
-              {activeHero.pointers.map((point, idx) => (
-                <div key={idx} className="flex items-start gap-2 md:gap-3 mb-3 md:mb-4">
-                  <img src={point.icon} alt="icon" className="w-4 md:w-5 mt-1" />
-                  <p className="text-sm md:text-base font-gtwalsheim leading-relaxed">
-                  <strong>{point.textinitial}</strong> {point.text}
-                  </p>
+        {/* LEFT HERO CARD WITH ANIMATE PRESENCE */}
+        <div className="flex-1 flex flex-col justify-stretch">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              className={`flex-1 rounded-2xl text-white ${activeHero.backgroundClass} p-6 md:p-8 lg:p-10 transform-gpu`}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 30 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              style={{ willChange: "transform, opacity" }}
+            >
+              <div className="flex flex-col md:flex-row gap-6 lg:gap-10 py-12 md:py-16 lg:py-24">
+                {/* HERO IMAGE + TITLE */}
+                <div className="flex flex-col items-center">
+                  <img
+                    src={activeHero.title}
+                    alt="title"
+                    loading="lazy"
+                    decoding="async"
+                    className="h-[50px] md:h-[65px] lg:h-[80px] mb-4"
+                  />
+                  <img
+                    src={activeHero.referenaceImage}
+                    alt="hero"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-[200px] md:w-[260px] lg:w-[320px] h-[340px] md:h-[420px] lg:h-[500px] object-cover rounded-xl"
+                  />
                 </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
 
-        {/* RIGHT SIDE SMALL HERO IMAGES */}
-        <div
+                {/* HERO DESCRIPTION */}
+                <div className="flex flex-col justify-center max-w-full md:max-w-[300px] lg:max-w-[340px] gap-4 md:gap-5">
+                  <h3 className="text-lg md:text-2xl lg:text-[32px] font-goldman font-black mb-2 md:mb-4 leading-snug md:leading-tight drop-shadow-lg uppercase tracking-tighter [-webkit-text-stroke:1.2px_black]">
+                    {activeHero.heading}
+                  </h3>
+                  {activeHero.pointers.map((point, idx) => (
+                    <div key={idx} className="flex items-start gap-2 md:gap-3 mb-3 md:mb-4">
+                      <img src={point.icon} alt="icon" className="w-4 md:w-5 mt-1" />
+                      <p className="text-sm md:text-base font-gtwalsheim leading-relaxed">
+                        <strong>{point.textinitial}</strong> {point.text}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* RIGHT SIDE SMALL HERO IMAGES WITH VIEWPORT STAGGER */}
+        <motion.div
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-2 gap-4 md:gap-6 mx-auto"
-          data-aos="fade-left"
+          variants={gridContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
         >
           {IMGS.map((hero, idx) => (
             <motion.div
               key={idx}
-              className="relative w-[130px] md:w-[150px] lg:w-[180px] h-[200px] md:h-[240px] lg:h-[270px] rounded-xl cursor-pointer overflow-hidden"
+              className="relative w-[130px] md:w-[150px] lg:w-[180px] h-[200px] md:h-[240px] lg:h-[270px] rounded-xl cursor-pointer overflow-hidden transform-gpu"
+              variants={gridItemVariants}
               onClick={() => setActiveIndex(idx)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -298,7 +323,7 @@ function IntroducedHero() {
               />
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

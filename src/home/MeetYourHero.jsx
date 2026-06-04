@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import brainy from "../assets/new_meet_your_hero-mob/MissBrainy-card.svg";
-import missBrainyBig from "../assets/new_meet_your_hero-mob/MissBrainy.svg";
+import missBrainyBig from "../assets/desktopViewImages/new-introduceOurHero/missBrainy.webp";
 import brainyName from "../assets/meet_your_hero/missBrainyName.svg";
 import brainyIcon from "../assets/meet_your_hero/brainyIcon.svg";
 import { motion, AnimatePresence } from "framer-motion";
@@ -71,14 +71,14 @@ function MeetYourHero() {
       <motion.img
         src={decorativebgBottomLeft}
         alt="decorativebgBottomLeft"
-        className="absolute bottom-0 left-0 w-24 sm:w-40 opacity-90 -z-10"
+        className="absolute bottom-0 left-0 w-24 sm:w-40 opacity-90 -z-10 transform-gpu"
         animate={{ y: [0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
       />
       <motion.img
         src={decorativebgRight}
         alt="decorativebgRight"
-        className="absolute top-1/2 right-0 w-40 sm:w-48 opacity-90 -z-10"
+        className="absolute top-1/2 right-0 w-40 sm:w-48 opacity-90 -z-10 transform-gpu"
         animate={{ y: [0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
       />
@@ -87,12 +87,12 @@ function MeetYourHero() {
         <AnimatePresence mode="wait">
           {selectedHero && (
             <motion.div
-              key={selectedHero.id || selectedHero.name}
-              className={`flex justify-between text-[14px] text-white px-4 pt-12 pb-2 h-[472px] ${selectedHero.backgroundClass}`}
-              initial={{ opacity: 0, y: 20 }}
+              key={selectedHero.heading}
+              className={`flex justify-between text-[14px] text-white px-4 pt-12 pb-2 h-[472px] ${selectedHero.backgroundClass} transform-gpu`}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Left Side: Hero Image + Title */}
               <motion.div
