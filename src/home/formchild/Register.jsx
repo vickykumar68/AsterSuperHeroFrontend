@@ -51,12 +51,12 @@ function Register({ setActiveForm }) {
   const [open, setOpen] = useState(false);
   const [personaOpen, setPersonaOpen] = useState(false);
   const [selected, setSelected] = useState("Your Age Group");
-  const [selectedPersona, setSelectedPersona] = useState("Choose your persona");
+  const [selectedPersona, setSelectedPersona] = useState("Choose Your Superhero");
 
   const options = ['5-7', '8-10', '11-12', '13-14'];
   
   const personas = [
-    { name: 'Flash Floss', icon: flashFloss, color: '#4ECDC4', description: 'Quick and agile floss master' },
+    { name: 'Flashing Floss', icon: flashFloss, color: '#4ECDC4', description: 'Quick and agile floss master' },
     { name: 'Germ Zapper', icon: germZapper, color: '#45B7AF', description: 'Defender against germs' },
     { name: 'Green Gobbler', icon: greenGobbler, color: '#96CEB4', description: 'Master of healthy eating' },
     { name: 'Hydro Hero', icon: hydroHero, color: '#FFEEAD', description: 'Champion of hydration' },
